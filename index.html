@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelly Cheng — Digital Marketer & Content Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFBF5;
+    --cream-deep:#F5EAD8;
+    --pink:#C9A8F0;
+    --pink-deep:#9B6FE0;
+    --lavender:#E3D6FF;
+    --lavender-deep:#B79EF0;
+    --mint:#EAD9B8;
+    --mint-deep:#D4B983;
+    --yellow:#F0E2FF;
+    --plum:#3D2B4E;
+    --plum-soft:#6B5680;
+    --white:#FFFFFF;
+    --shadow: 6px 6px 0px rgba(61,43,78,0.12);
+    --shadow-sm: 4px 4px 0px rgba(61,43,78,0.10);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--plum);
+    font-family:'Nunito', sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    margin:0;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--pink); color:white;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- decorative blobs & sparkles ---------- */
+  .blob{position:absolute; border-radius:50%; filter:blur(2px); opacity:0.5; pointer-events:none; z-index:0;}
+  .sparkle{position:absolute; pointer-events:none; z-index:1;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(var(--r,0deg));}
+    50%{transform:translateY(-14px) rotate(var(--r,0deg));}
+  }
+  @keyframes spin-slow{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }
+
+  /* ---------- nav ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:100;
+    display:flex; justify-content:center;
+    padding:16px 20px;
+    background:linear-gradient(to bottom, var(--cream) 70%, transparent);
+  }
+  .nav-pill{
+    display:flex; gap:4px;
+    background:var(--white);
+    border:2px solid var(--plum);
+    border-radius:999px;
+    padding:6px;
+    box-shadow:var(--shadow-sm);
+  }
+  .nav-pill a{
+    text-decoration:none;
+    font-family:'Fredoka', sans-serif;
+    font-weight:500;
+    font-size:14px;
+    color:var(--plum-soft);
+    padding:9px 16px;
+    border-radius:999px;
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  .nav-pill a:hover{background:var(--pink); color:white;}
+
+  section{position:relative; padding:80px 20px; max-width:1080px; margin:0 auto;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding-top:20px;
+    max-width:1200px;
+  }
+  .avatar{
+    width:120px; height:120px; border-radius:50%;
+    background:linear-gradient(135deg, var(--pink), var(--lavender));
+    border:4px solid var(--plum);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka'; font-weight:700; font-size:42px; color:white;
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+    animation:float 5s ease-in-out infinite;
+    overflow:hidden;
+  }
+  .avatar img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    background:var(--yellow);
+    border:2px solid var(--plum);
+    padding:5px 14px;
+    border-radius:999px;
+    display:inline-block;
+    margin-bottom:20px;
+    box-shadow:var(--shadow-sm);
+  }
+  .hero h1{
+    font-size:clamp(42px, 8vw, 84px);
+    line-height:1;
+    color:var(--plum);
+  }
+  .hero h1 span{color:var(--pink-deep);}
+  .hero-tag{
+    max-width:560px;
+    font-size:19px;
+    font-weight:800;
+    color:var(--plum-soft);
+    margin:22px 0 6px;
+    line-height:1.5;
+  }
+  .hero-sub{
+    max-width:480px;
+    font-size:15px;
+    color:var(--plum-soft);
+    opacity:0.85;
+    margin-bottom:34px;
+  }
+  .hero-btns{display:flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+  .btn{
+    font-family:'Fredoka'; font-weight:600; font-size:15px;
+    padding:14px 26px; border-radius:999px;
+    border:2px solid var(--plum);
+    text-decoration:none;
+    cursor:pointer;
+    box-shadow:var(--shadow-sm);
+    transition:transform .15s;
+    display:inline-block;
+  }
+  .btn:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0px rgba(61,43,78,0.15);}
+  .btn:active{transform:translate(0,0); box-shadow:2px 2px 0px rgba(61,43,78,0.15);}
+  .btn-primary{background:var(--pink-deep); color:white;}
+  .btn-secondary{background:white; color:var(--plum);}
+
+  /* floating stat stickers around hero */
+  .sticker{
+    position:absolute;
+    background:white;
+    border:2px solid var(--plum);
+    border-radius:16px;
+    padding:10px 14px;
+    box-shadow:var(--shadow-sm);
+    font-family:'Fredoka';
+    text-align:center;
+    animation:float 6s ease-in-out infinite;
+    z-index:2;
+  }
+  .sticker .num{font-size:20px; font-weight:700; color:var(--pink-deep); display:block;}
+  .sticker .lbl{font-family:'Space Mono'; font-size:10px; color:var(--plum-soft); text-transform:uppercase; letter-spacing:0.5px;}
+  .s1{top:8%; left:4%; transform:rotate(-8deg); --r:-8deg; background:var(--mint);}
+  .s2{top:18%; right:3%; transform:rotate(7deg); --r:7deg; animation-delay:.6s; background:var(--lavender);}
+  .s3{bottom:16%; left:8%; transform:rotate(6deg); --r:6deg; animation-delay:1.2s; background:var(--yellow);}
+  .s4{bottom:10%; right:7%; transform:rotate(-6deg); --r:-6deg; animation-delay:1.8s; background:var(--pink);}
+
+  @media (max-width:820px){
+    .sticker{display:none;}
+  }
+
+  /* ---------- section headers ---------- */
+  .sec-head{text-align:center; margin-bottom:48px;}
+  .sec-head .eyebrow-lite{
+    font-family:'Space Mono'; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--pink-deep); font-weight:700; display:block; margin-bottom:8px;
+  }
+  .sec-head h2{font-size:clamp(30px,5vw,44px); color:var(--plum);}
+  .sec-head p{color:var(--plum-soft); max-width:560px; margin:14px auto 0; font-weight:600;}
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:start;
+  }
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
+  .about-card{
+    background:white; border:2px solid var(--plum); border-radius:24px;
+    padding:34px; box-shadow:var(--shadow);
+  }
+  .about-card p{font-size:16px; line-height:1.75; color:var(--plum); margin:0 0 16px;}
+  .about-card p:last-child{margin-bottom:0;}
+  .about-card strong{color:var(--pink-deep);}
+
+  .tag-cloud{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
+  .tag{
+    background:var(--cream-deep); border:2px solid var(--plum); border-radius:999px;
+    padding:8px 16px; font-family:'Fredoka'; font-size:13.5px; font-weight:500;
+  }
+
+  .fact-list{display:flex; flex-direction:column; gap:16px;}
+  .fact{
+    background:white; border:2px solid var(--plum); border-radius:18px; padding:18px 20px;
+    box-shadow:var(--shadow-sm); display:flex; gap:14px; align-items:flex-start;
+  }
+  .fact .emoji{font-size:24px; line-height:1;}
+  .fact h4{font-size:15px; margin-bottom:4px;}
+  .fact p{margin:0; font-size:13.5px; color:var(--plum-soft); font-weight:600; line-height:1.5;}
+
+  /* ---------- what's in my bag ---------- */
+  .bag-card{
+    margin-top:32px;
+    background:white; border:2px solid var(--plum); border-radius:24px;
+    padding:36px 24px 20px; box-shadow:var(--shadow);
+    text-align:center;
+  }
+  .bag-card h3{font-size:20px; margin-bottom:6px;}
+  .bag-card .bag-sub{color:var(--plum-soft); font-weight:700; font-size:13.5px; margin-bottom:10px;}
+  .bag-wrap{
+    position:relative;
+    height:270px;
+    display:flex; align-items:flex-end; justify-content:center;
+    max-width:520px; margin:0 auto;
+  }
+  .bag-icon{
+    font-size:104px; line-height:1; z-index:3;
+    filter:drop-shadow(4px 6px 0px rgba(61,43,78,0.15));
+    animation:float 5.5s ease-in-out infinite;
+  }
+  .bag-item{
+    position:absolute;
+    width:54px; height:54px;
+    background:var(--cream-deep);
+    border:2px solid var(--plum);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px;
+    box-shadow:var(--shadow-sm);
+    animation:float 4.5s ease-in-out infinite;
+    z-index:2;
+  }
+  .bi1{top:6%;  left:10%; transform:rotate(-10deg); --r:-10deg; background:var(--lavender);}
+  .bi2{top:0%;  right:8%; transform:rotate(9deg);  --r:9deg;  background:var(--pink); animation-delay:.4s;}
+  .bi3{top:32%; left:0%;  transform:rotate(-6deg); --r:-6deg; animation-delay:.8s;}
+  .bi4{top:28%; right:-2%;transform:rotate(8deg);  --r:8deg;  background:var(--mint); animation-delay:1.2s;}
+  .bi5{bottom:26%; left:16%; transform:rotate(-12deg); --r:-12deg; background:var(--pink); animation-delay:1.6s;}
+  .bi6{bottom:22%; right:14%; transform:rotate(11deg); --r:11deg; background:var(--lavender); animation-delay:2s;}
+  .bi7{bottom:6%; left:38%; transform:rotate(-5deg); --r:-5deg; background:var(--mint); animation-delay:2.4s;}
+  .bag-labels{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:6px;}
+  .bag-labels .tag{font-size:12.5px; padding:6px 12px;}
+  @media (max-width:520px){
+    .bag-icon{font-size:80px;}
+    .bag-item{width:44px; height:44px; font-size:21px;}
+    .bag-wrap{height:230px;}
+  }
+
+  /* ---------- journey ---------- */
+  .tabs{display:flex; justify-content:center; gap:10px; margin-bottom:40px; flex-wrap:wrap;}
+  .tab-btn{
+    font-family:'Fredoka'; font-weight:600; font-size:14px;
+    background:white; border:2px solid var(--plum); border-radius:999px;
+    padding:10px 20px; cursor:pointer; box-shadow:var(--shadow-sm);
+    transition:.15s;
+  }
+  .tab-btn.active{background:var(--plum); color:white;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block; animation:fadein .3s ease;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .job-card{
+    background:white; border:2px solid var(--plum); border-radius:20px;
+    padding:26px 28px; margin-bottom:22px; box-shadow:var(--shadow-sm);
+    position:relative;
+  }
+  .job-card:nth-child(odd){transform:rotate(-0.4deg);}
+  .job-card:nth-child(even){transform:rotate(0.4deg);}
+  .job-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; margin-bottom:6px;}
+  .job-role{font-family:'Fredoka'; font-size:18px; font-weight:600; color:var(--plum);}
+  .job-org{color:var(--pink-deep); font-weight:700;}
+  .job-date{font-family:'Space Mono'; font-size:12px; color:var(--plum-soft); background:var(--cream-deep); padding:4px 10px; border-radius:999px;}
+  .job-loc{font-size:12.5px; color:var(--plum-soft); font-weight:700; margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px;}
+  .job-card ul{margin:0; padding-left:20px; color:var(--plum);}
+  .job-card li{margin-bottom:6px; font-size:14.5px; line-height:1.55;}
+  .job-card li::marker{color:var(--pink-deep);}
+  .badge-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+  .stat-badge{
+    background:var(--mint); border:2px solid var(--plum); border-radius:10px;
+    padding:5px 10px; font-family:'Space Mono'; font-size:12px; font-weight:700;
+  }
+
+  .edu-card{
+    background:var(--lavender); border:2px solid var(--plum); border-radius:20px;
+    padding:26px 28px; box-shadow:var(--shadow-sm); margin-top:8px;
+  }
+  .edu-card h4{font-size:17px; margin-bottom:4px;}
+  .edu-card .job-date{background:white;}
+
+  /* ---------- toolkit ---------- */
+  .toolkit-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:760px){.toolkit-grid{grid-template-columns:1fr;}}
+  .kit-card{
+    background:white; border:2px solid var(--plum); border-radius:20px;
+    padding:24px; box-shadow:var(--shadow-sm);
+  }
+  .kit-card h4{font-size:15px; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  .kit-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .kit-pill{
+    background:var(--cream-deep); border:1.5px solid var(--plum); border-radius:8px;
+    padding:6px 10px; font-size:12.5px; font-weight:700; font-family:'Space Mono';
+  }
+  .cert-strip{
+    margin-top:26px; background:var(--yellow); border:2px solid var(--plum); border-radius:20px;
+    padding:22px 26px; box-shadow:var(--shadow-sm);
+  }
+  .cert-strip h4{margin-bottom:12px; font-size:15px;}
+  .cert-strip .kit-pills .kit-pill{background:white;}
+
+  /* ---------- content carousel ---------- */
+  .carousel{
+    position:relative; display:flex; align-items:center; gap:18px;
+    max-width:880px; margin:0 auto; z-index:2;
+  }
+  .car-track-wrap{
+    flex:1; overflow:hidden; border-radius:26px;
+    border:2px solid var(--plum); box-shadow:var(--shadow);
+    background:var(--cream-deep);
+  }
+  .car-track{display:flex; transition:transform .45s cubic-bezier(.65,0,.35,1);}
+  .car-slide{
+    flex:0 0 100%; height:480px; box-sizing:border-box;
+    display:flex; align-items:center; justify-content:center; padding:22px;
+  }
+  .car-slide .video-wrap{
+    position:relative; border-radius:16px; overflow:hidden; background:var(--plum);
+  }
+  .car-slide .video-wrap.vertical{height:100%; aspect-ratio:9/16;}
+  .car-slide .video-wrap.landscape{width:100%; aspect-ratio:16/9;}
+  .car-slide .video-wrap video, .car-slide .video-wrap iframe{
+    position:absolute; top:0; left:0; width:100%; height:100%; border:0;
+  }
+  .car-btn{
+    flex:0 0 auto; width:42px; height:42px; border-radius:50%;
+    background:white; border:2px solid var(--plum); box-shadow:var(--shadow-sm);
+    font-size:18px; font-family:'Fredoka'; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s;
+  }
+  .car-btn:hover{transform:translateY(-2px);}
+  .car-btn:active{transform:translateY(0);}
+  .car-dots{display:flex; justify-content:center; gap:9px; margin-top:18px;}
+  .car-dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--cream-deep); border:2px solid var(--plum);
+    cursor:pointer; padding:0;
+  }
+  .car-dot.active{background:var(--pink-deep);}
+  @media (max-width:480px){
+    .carousel{max-width:94vw; gap:8px;}
+    .car-slide{height:260px;}
+    .car-btn{width:36px; height:36px; font-size:15px;}
+  }
+
+  /* ---------- contact ---------- */
+  .contact-wrap{text-align:center;}
+  .contact-card{
+    background:var(--plum); color:white; border-radius:28px; padding:56px 30px;
+    position:relative; overflow:hidden;
+  }
+  .contact-card h2{color:white; font-size:clamp(28px,5vw,42px);}
+  .contact-card p{color:#E4D9F0; max-width:480px; margin:14px auto 30px; font-weight:600;}
+  .contact-links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .clink{
+    background:white; color:var(--plum); text-decoration:none;
+    font-family:'Fredoka'; font-weight:600; font-size:14px;
+    padding:12px 22px; border-radius:999px; border:2px solid var(--plum);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s;
+  }
+  .clink:hover{transform:translateY(-3px); background:var(--pink);}
+
+  footer{
+    text-align:center; padding:30px 20px 40px; color:var(--plum-soft);
+    font-family:'Space Mono'; font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-pill">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#content">Content</a>
+    <a href="#contact">Say Hi</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="blob" style="width:340px;height:340px;background:var(--pink);top:-60px;left:-100px;"></div>
+  <div class="blob" style="width:280px;height:280px;background:var(--mint);bottom:-40px;right:-80px;"></div>
+
+  <div class="sticker s1"><span class="num">900+</span><span class="lbl">Twitch Followers</span></div>
+  <div class="sticker s2"><span class="num">1.5M+</span><span class="lbl">Total Views</span></div>
+  <div class="sticker s3"><span class="num">40%</span><span class="lbl">Sales Lift</span></div>
+  <div class="sticker s4"><span class="num">🏆 1st</span><span class="lbl">CLOL Warmup</span></div>
+
+  <div class="avatar">
+    <img src="kelly-avatar.jpg" alt="Kelly Cheng">
+  </div>
+  <span class="eyebrow">Digital Marketing Manager · NYC</span>
+  <h1>Hi, I'm <span>Kelly Cheng</span></h1>
+  <p class="hero-tag">Digital Marketer</p>
+  <p class="hero-sub">Marketing grad blending data, storytelling, and a little bit of gamer chaos. Currently building brand & content strategy at EZ Esports.</p>
+  <div class="hero-btns">
+    <a href="#journey" class="btn btn-primary">See my journey ✨</a>
+    <a href="#contact" class="btn btn-secondary">Say hi 👋</a>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="blob" style="width:210px;height:210px;background:var(--pink);top:2%;right:0%;opacity:0.18;"></div>
+  <div class="blob" style="width:160px;height:160px;background:var(--mint);bottom:0%;left:1%;opacity:0.18;"></div>
+  <div class="sec-head">
+    <span class="eyebrow-lite">Get to know me</span>
+    <h2>More than a marketer 💗</h2>
+    <p>The short version: I love making things people actually want to engage with — whether that's a brand's audience, a Twitch chat, or a kid learning a new skill.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <p>I'm currently the <strong>Digital Marketing Manager at EZ Esports</strong>, an NYC nonprofit run by Edison Zhong that gives high schoolers real experience competing in the esports scene. I run content strategy, brand identity, and analytics for the org — basically I get to be data nerd and creative director at the same time, which is my favorite combo.</p>
+      <p>I love picking up new skills and getting a feel for industries I haven't touched yet — before EZ Esports, that curiosity took me across beauty (Rei Cosmetics), wellness (Exuding Wellness), kids' products (Delta Children), and small business marketing (The KOVA), so I've pitched, filmed, edited, and analyzed my way through a lot of different audiences.</p>
+      <p>Outside of the 9-to-5, I stream League of Legends and VALORANT on Twitch as <strong>"KYUXTII,"</strong> and I spent two years managing a 14-player collegiate League of Legends program (we took 1st place 🏆). I also worked part-time with kids with developmental disabilities — it kept me grounded and honestly made me a better communicator everywhere else.</p>
+      <div class="tag-cloud">
+        <span class="tag">🎮 Esports & Gaming</span>
+        <span class="tag">🎨 Content Creation</span>
+        <span class="tag">💄 Beauty</span>
+        <span class="tag">📡 Streaming</span>
+        <span class="tag">✈️ Traveling & Sightseeing</span>
+        <span class="tag">👯 Going Out with Friends</span>
+      </div>
+    </div>
+
+    <div class="fact-list">
+      <div class="fact">
+        <span class="emoji">🎓</span>
+        <div><h4>Baruch College, '26</h4><p>BBA in Marketing Management, Minor in Communication Studies — 3.5 GPA, Dean's List.</p></div>
+      </div>
+      <div class="fact">
+        <span class="emoji">🕹️</span>
+        <div><h4>Full-time gamer energy</h4><p>900+ Twitch followers, 1.5M+ views across platforms, and a championship banner to prove it.</p></div>
+      </div>
+      <div class="fact">
+        <span class="emoji">🧠</span>
+        <div><h4>Data-informed, always</h4><p>SemRush-certified across SEO, analytics, and AI-powered marketing. I don't post without a reason.</p></div>
+      </div>
+      <div class="fact">
+        <span class="emoji">🌱</span>
+        <div><h4>Soft spot for kids</h4><p>Mandated Reporter-certified; I've spent years supporting early childhood and developmental education.</p></div>
+      </div>
+      <div class="fact">
+        <span class="emoji">✈️</span>
+        <div><h4>Always planning the next trip</h4><p>When I'm not creating content, I'm out sightseeing somewhere new or dragging my friends into whatever activity I'm currently obsessed with.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section id="journey">
+  <div class="blob" style="width:190px;height:190px;background:var(--lavender);top:1%;left:0%;opacity:0.18;"></div>
+  <div class="blob" style="width:150px;height:150px;background:var(--pink);bottom:2%;right:2%;opacity:0.18;"></div>
+  <div class="sec-head">
+    <span class="eyebrow-lite">My journey</span>
+    <h2>Where I've made an impact 🚀</h2>
+    <p>Three sides of the same coin: strategic marketer, esports leader, and community-minded human.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="marketing">💼 Marketing</button>
+    <button class="tab-btn" data-tab="esports">🎮 Esports &amp; Leadership</button>
+    <button class="tab-btn" data-tab="community">🌱 Education &amp; Community</button>
+  </div>
+
+  <!-- MARKETING -->
+  <div class="tab-panel active" id="marketing">
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Digital Marketing Manager · <span class="job-org">EZ Esports</span></span><span class="job-date">Jun 2026 – Present</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Run content performance analysis to guide social strategy, doubling down on what works and cutting what doesn't.</li>
+        <li>Build quarterly content roadmaps supporting Twitch growth, tournament promotion, and player acquisition.</li>
+        <li>Own creative strategy and brand identity — visual consistency and seasonal themes across every platform.</li>
+      </ul>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Social Media Marketing Intern · <span class="job-org">TOPIA</span></span><span class="job-date">May – Jun 2026</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Planned and scheduled 12+ monthly Instagram posts, weekly reels, and Stories via Planoly.</li>
+        <li>Built cross-channel content across Instagram, LinkedIn, and email newsletters.</li>
+      </ul>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Digital Marketing Coordinator · <span class="job-org">Rei Cosmetics</span></span><span class="job-date">May – Sept 2025</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Pitched data-informed content roadmaps and mood boards directly to the CEO.</li>
+        <li>Produced 3–5 video assets weekly with a 3-person influencer team, on an $800 budget.</li>
+        <li>Ran a Meta ads campaign for Anime NYC, timed to cosplay-specific product lines.</li>
+      </ul>
+      <div class="badge-row"><span class="stat-badge">+40% sales surge</span></div>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Marketing &amp; Sales Associate · <span class="job-org">Delta Children Enterprise</span></span><span class="job-date">Jul – Aug 2025</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Paired complementary baby products to lift cross-sell revenue and average order value.</li>
+        <li>Audited 100+ Shopify listings for metadata accuracy and navigation.</li>
+        <li>Wrote SEO-optimized blog content targeting parent search intent.</li>
+      </ul>
+      <div class="badge-row"><span class="stat-badge">+75% cross-sell</span><span class="stat-badge">+80% organic traffic</span></div>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Email Marketing Strategist · <span class="job-org">Exuding Wellness</span></span><span class="job-date">Jun – Aug 2024</span></div>
+      <div class="job-loc">Remote</div>
+      <ul>
+        <li>Directed a 12-month automated email roadmap for 1,200+ subscribers on systeme.io.</li>
+        <li>Aligned email lifecycle strategy with social growth as part of a 5-person team.</li>
+      </ul>
+      <div class="badge-row"><span class="stat-badge">+50% YoY retention</span><span class="stat-badge">+25% sales</span></div>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Social Media Marketing / Assistant Manager · <span class="job-org">The KOVA</span></span><span class="job-date">Jan 2024 – Present</span></div>
+      <div class="job-loc">Staten Island, NY</div>
+      <ul>
+        <li>Built a content strategy that grew Instagram and TikTok views 275% in a single week.</li>
+        <li>Supervise and train a 4-person team, keeping brand standards consistent during peak hours.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ESPORTS -->
+  <div class="tab-panel" id="esports">
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Content Creator &amp; Channel Manager · <span class="job-org">Twitch "KYUXTII"</span></span><span class="job-date">Jun 2022 – Present</span></div>
+      <div class="job-loc">Remote</div>
+      <ul>
+        <li>Grew the channel to 900+ followers through consistent multi-platform content and live broadcasts.</li>
+        <li>Generated $2,500+ in revenue via subs, donations, and community goals.</li>
+        <li>Drove a 450% weekly increase in organic reach through trend-driven short-form content.</li>
+      </ul>
+      <div class="badge-row"><span class="stat-badge">1.5M+ total views</span></div>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">League of Legends Team Manager · <span class="job-org">Baruch Esports Association</span></span><span class="job-date">Sept 2024 – Dec 2025</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Directed two rosters (14 players total) — logistics, discipline, and competitive strategy.</li>
+        <li>Led the varsity squad to 1st place in the CLOL Fall Warmup with a 90% win rate.</li>
+        <li>Negotiated rescheduling with 10+ collegiate orgs for 100% match compliance, zero forfeits.</li>
+      </ul>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Media Committee Member · <span class="job-org">Baruch Esports Association</span></span><span class="job-date">Sept 2022 – May 2025</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Produced multimedia content promoting tournaments with $1,000+ prize pools and 40+ players.</li>
+        <li>Grew digital engagement 30% through targeted campaigns and visual assets.</li>
+      </ul>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Broadcast Caster · <span class="job-org">Marvel Rivals Match</span></span><span class="job-date">Feb – Mar 2025</span></div>
+      <div class="job-loc">Manhattan, NY</div>
+      <ul>
+        <li>Built pre-show workflows and talking points to keep production tight.</li>
+        <li>Translated complex mechanics into digestible commentary for a live audience.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="tab-panel" id="community">
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Direct Support Professional · <span class="job-org">Chemlu Developmental Disabilities Center</span></span><span class="job-date">Nov 2024 – May 2026</span></div>
+      <div class="job-loc">Staten Island, NY</div>
+      <ul>
+        <li>Facilitated 15+ learning and engagement activities monthly for kids ages 4–13.</li>
+        <li>Tracked progress with behavioral data, adjusting strategies weekly.</li>
+      </ul>
+      <div class="badge-row"><span class="stat-badge">+20% goal attainment</span></div>
+    </div>
+    <div class="job-card">
+      <div class="job-top"><span class="job-role">Teacher Assistant · <span class="job-org">New Dorp High School</span></span><span class="job-date">Sept 2021 – Jun 2022</span></div>
+      <div class="job-loc">Staten Island, NY</div>
+      <ul>
+        <li>Supported Algebra I instruction with one-on-one help and alternative teaching techniques.</li>
+        <li>Also assisted in the school's daycare program with early childhood learning activities.</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="job-top"><h4>🎓 Baruch College, City University of New York</h4><span class="job-date">May 2026</span></div>
+      <p style="margin:0; font-weight:700;">BBA, Marketing Management · Minor in Communication Studies · 3.5 GPA · Dean's List</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENT ================= -->
+<section id="content">
+  <div class="blob" style="width:200px;height:200px;background:var(--lavender);top:0%;left:2%;opacity:0.2;"></div>
+  <div class="blob" style="width:170px;height:170px;background:var(--yellow);bottom:4%;right:4%;opacity:0.2;"></div>
+
+  <div class="sec-head">
+    <span class="eyebrow-lite">See it in action</span>
+    <h2>Content I've made 🎬</h2>
+  </div>
+
+  <div class="carousel">
+    <button class="car-btn prev" aria-label="Previous video">‹</button>
+    <div class="car-track-wrap">
+      <div class="car-track">
+        <div class="car-slide">
+          <div class="video-wrap vertical">
+            <video controls preload="metadata" playsinline>
+              <source src="celestial.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="car-slide">
+          <div class="video-wrap vertical">
+            <video controls preload="metadata" playsinline>
+              <source src="03272025_final.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="car-slide">
+          <div class="video-wrap landscape">
+            <iframe src="https://www.youtube.com/embed/_2H0v5lXHs8" title="do NOT play this game with your best friends.." loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="car-slide">
+          <div class="video-wrap landscape">
+            <iframe src="https://www.youtube.com/embed/uSCppbJ1ETg" title="Monozukuri: How 3650 Liquid Eyeliners are Made" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="car-slide">
+          <div class="video-wrap landscape">
+            <iframe src="https://www.youtube.com/embed/cd2TgDh82jo" title="Monozukuri: How Kikumasamune Skincare Products are Made" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="car-btn next" aria-label="Next video">›</button>
+  </div>
+  <div class="car-dots"></div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-card">
+      <div class="blob" style="width:260px;height:260px;background:var(--pink);top:-80px;right:-60px;opacity:0.25;"></div>
+      <div class="blob" style="width:220px;height:220px;background:var(--mint);bottom:-70px;left:-50px;opacity:0.25;"></div>
+      <h2>Let's create something together ✨</h2>
+      <p>Whether it's a brand strategy, a content collab, or you just want to talk shop — my inbox is open.</p>
+      <div class="contact-links">
+        <a class="clink" href="mailto:kellycheng0824@gmail.com">✉️ Email</a>
+        <a class="clink" href="https://www.linkedin.com/in/kelly-cheng-huang/" target="_blank" rel="noopener">💼 LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>made with 💗 by Kelly Cheng · NYC</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---- content carousel ----
+  (function(){
+    const track = document.querySelector('.car-track');
+    const slides = document.querySelectorAll('.car-slide');
+    const dotsWrap = document.querySelector('.car-dots');
+    let idx = 0;
+
+    slides.forEach((_, i)=>{
+      const dot = document.createElement('button');
+      dot.className = 'car-dot' + (i===0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to video ' + (i+1));
+      dot.addEventListener('click', ()=>goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.car-dot');
+
+    function goTo(i){
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d,j)=>d.classList.toggle('active', j===idx));
+    }
+    document.querySelector('.car-btn.prev').addEventListener('click', ()=>goTo(idx-1));
+    document.querySelector('.car-btn.next').addEventListener('click', ()=>goTo(idx+1));
+  })();
+</script>
+
+</body>
+</html>
