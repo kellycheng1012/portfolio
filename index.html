@@ -383,7 +383,7 @@
   /* ---------- design gallery ---------- */
   .gg-carousel{
     position:relative; display:flex; align-items:center; gap:18px;
-    max-width:520px; margin:0 auto; z-index:2;
+    max-width:580px; margin:0 auto; z-index:2;
   }
   .gg-track-wrap{
     flex:1; overflow:hidden; border-radius:26px;
@@ -397,10 +397,13 @@
   }
   .gg-slide .img-wrap{
     position:relative; border-radius:16px; overflow:hidden; background:var(--plum);
-    width:100%; aspect-ratio:4/5;
+    width:100%; aspect-ratio:3/4;
   }
   .gg-slide .img-wrap img{
     position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+  }
+  .gg-slide .img-wrap img.fit-contain{
+    object-fit:contain; background:white;
   }
   .gg-dots{display:flex; justify-content:center; gap:9px; margin-top:18px;}
   .gg-dot{
@@ -808,7 +811,7 @@
         <div class="gg-slide"><div class="img-wrap"><img src="canva-fish-snack.png" alt="Where Fish Swim... Flavor Follows, fish snack ad design" loading="lazy"></div></div>
         <div class="gg-slide"><div class="img-wrap"><img src="canva-meanclips.png" alt="Mean Clips parody magazine ad design" loading="lazy"></div></div>
         <div class="gg-slide"><div class="img-wrap"><img src="canva-retro-music-night.png" alt="Music &amp; Method Annual Spring Concert flyer" loading="lazy"></div></div>
-        <div class="gg-slide"><div class="img-wrap"><img src="canva-shop-now.png" alt="Tiffany &amp; Co. Shop Now ad design" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img class="fit-contain" src="canva-shop-now.png" alt="Tiffany &amp; Co. Shop Now ad design" loading="lazy"></div></div>
         <div class="gg-slide"><div class="img-wrap"><img src="canva-cereal-eyecontact.png" alt="Warby Parker Scout contact lens ad design" loading="lazy"></div></div>
         <div class="gg-slide"><div class="img-wrap"><img src="canva-1.png" alt="EZ Esports Behind the Brand deck, slide 1" loading="lazy"></div></div>
         <div class="gg-slide"><div class="img-wrap"><img src="canva-2.png" alt="EZ Esports Behind the Brand deck, slide 2" loading="lazy"></div></div>
