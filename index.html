@@ -49,7 +49,11 @@
   }
 
   /* ---------- decorative blobs & sparkles ---------- */
-  .blob{position:absolute; border-radius:50%; filter:blur(2px); opacity:0.5; pointer-events:none; z-index:0;}
+  .blob{position:absolute; border-radius:50%; filter:blur(2px); opacity:0.5; pointer-events:none; z-index:0; background-blend-mode:screen; box-shadow:inset -10px -14px 30px rgba(0,0,0,0.08), inset 8px 10px 20px rgba(255,255,255,0.6);}
+  .blob::after{
+    content:''; position:absolute; top:14%; left:18%; width:32%; height:22%;
+    background:rgba(255,255,255,0.85); border-radius:50%; filter:blur(4px);
+  }
   .sparkle{position:absolute; pointer-events:none; z-index:1;}
   @keyframes float{
     0%,100%{transform:translateY(0) rotate(var(--r,0deg));}
@@ -376,6 +380,49 @@
     .car-btn{width:36px; height:36px; font-size:15px;}
   }
 
+  /* ---------- design gallery ---------- */
+  .gg-carousel{
+    position:relative; display:flex; align-items:center; gap:18px;
+    max-width:520px; margin:0 auto; z-index:2;
+  }
+  .gg-track-wrap{
+    flex:1; overflow:hidden; border-radius:26px;
+    border:2px solid var(--plum); box-shadow:var(--shadow);
+    background:var(--cream-deep);
+  }
+  .gg-track{display:flex; transition:transform .45s cubic-bezier(.65,0,.35,1);}
+  .gg-slide{
+    flex:0 0 100%; box-sizing:border-box;
+    display:flex; align-items:center; justify-content:center; padding:22px;
+  }
+  .gg-slide .img-wrap{
+    position:relative; border-radius:16px; overflow:hidden; background:var(--plum);
+    width:100%; aspect-ratio:4/5;
+  }
+  .gg-slide .img-wrap img{
+    position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+  }
+  .gg-dots{display:flex; justify-content:center; gap:9px; margin-top:18px;}
+  .gg-dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--cream-deep); border:2px solid var(--plum);
+    cursor:pointer; padding:0;
+  }
+  .gg-dot.active{background:var(--pink-deep);}
+  .gg-btn{
+    flex:0 0 auto; width:42px; height:42px; border-radius:50%;
+    background:white; border:2px solid var(--plum); box-shadow:var(--shadow-sm);
+    font-size:18px; font-family:'Fredoka'; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s;
+  }
+  .gg-btn:hover{transform:translateY(-2px);}
+  .gg-btn:active{transform:translateY(0);}
+  @media (max-width:480px){
+    .gg-carousel{max-width:94vw; gap:8px;}
+    .gg-btn{width:36px; height:36px; font-size:15px;}
+  }
+
   /* ---------- contact ---------- */
   .contact-wrap{text-align:center;}
   .contact-card{
@@ -408,6 +455,7 @@
     <a href="#about">About</a>
     <a href="#journey">Journey</a>
     <a href="#content">Content</a>
+    <a href="#design">Design</a>
     <a href="#contact">Say Hi</a>
   </div>
 </nav>
@@ -744,6 +792,32 @@
   <div class="car-dots"></div>
 </section>
 
+<!-- ================= DESIGN GALLERY ================= -->
+<section id="design">
+  <div class="blob" style="width:180px;height:180px;background:var(--pink); top:2%; right:4%; opacity:0.2;"></div>
+
+  <div class="sec-head">
+    <span class="eyebrow-lite">A peek at my Canva work</span>
+    <h2>GG, Good Graphics 🍵</h2>
+  </div>
+
+  <div class="gg-carousel">
+    <button class="gg-btn prev" aria-label="Previous slide">‹</button>
+    <div class="gg-track-wrap">
+      <div class="gg-track">
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-1.png" alt="EZ Esports Behind the Brand deck, slide 1" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-2.png" alt="EZ Esports Behind the Brand deck, slide 2" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-3.png" alt="EZ Esports Behind the Brand deck, slide 3" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-4.png" alt="EZ Esports Behind the Brand deck, slide 4" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-5.png" alt="EZ Esports Behind the Brand deck, slide 5" loading="lazy"></div></div>
+        <div class="gg-slide"><div class="img-wrap"><img src="canva-6.png" alt="EZ Esports Behind the Brand deck, slide 6" loading="lazy"></div></div>
+      </div>
+    </div>
+    <button class="gg-btn next" aria-label="Next slide">›</button>
+  </div>
+  <div class="gg-dots"></div>
+</section>
+
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="contact-wrap">
@@ -795,6 +869,31 @@
     }
     document.querySelector('.car-btn.prev').addEventListener('click', ()=>goTo(idx-1));
     document.querySelector('.car-btn.next').addEventListener('click', ()=>goTo(idx+1));
+  })();
+
+  // ---- design gallery carousel ----
+  (function(){
+    const track = document.querySelector('.gg-track');
+    const slides = document.querySelectorAll('.gg-slide');
+    const dotsWrap = document.querySelector('.gg-dots');
+    let idx = 0;
+
+    slides.forEach((_, i)=>{
+      const dot = document.createElement('button');
+      dot.className = 'gg-dot' + (i===0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i+1));
+      dot.addEventListener('click', ()=>goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = document.querySelectorAll('.gg-dot');
+
+    function goTo(i){
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d,j)=>d.classList.toggle('active', j===idx));
+    }
+    document.querySelector('.gg-btn.prev').addEventListener('click', ()=>goTo(idx-1));
+    document.querySelector('.gg-btn.next').addEventListener('click', ()=>goTo(idx+1));
   })();
 </script>
 
